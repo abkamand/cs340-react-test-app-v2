@@ -1,86 +1,114 @@
-// Reference: https://www.geeksforgeeks.org/how-to-build-a-basic-crud-app-with-node-js-and-reactjs/
-// Utilized code template from this setup guide, all credit to geeksforgeeks.com (allows use of tutorial/setup code with citation)
+// Reference: https://www.youtube.com/watch?v=T8mqZZ0r-RA
+// Utilized and adapted code from this tutorial video, credit to PedroTech
 
-// Import React
-import React from "react";
+// import react and axios
+import React, { useState, useEffect } from "react";
+import Axios from 'axios';
 
-// Import Bootstrap
-import { Nav, Navbar, Container, Row, Col }
-  from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.css";
 
-// Import Custom CSS
+// import css
 import "./App.css";
 
-// Import from react-router-dom
-import {
-  BrowserRouter as Router, Routes,
-  Route, Link
-} from "react-router-dom";
 
-// Import other React Component
-import CreatePerson from
-  "./Components/create-person.component";
-import EditPerson from
-  "./Components/edit-person.component";
-import PersonList from
-  "./Components/person-list.component";
+// main app body
+function App() {
 
-// App Component
-const App = () => {
+  // get/preserve inputs
+  const [fname, setFname] = useState('')
+  const [lname, setLname] = useState('')
+  const [homeworld, setHomeworld] = useState('')
+  const [age, setAge] = useState('')
+  const [peopleTable, setPeopleTable] = useState([]);
+
+  useEffect(() => {
+    Axios.get('http://localhost:3001/getPeople').then((response) => {
+      setPeopleTable(response.data);
+    });
+  }, []);
+
+  // post user inputs and refresh our table
+  const addPerson = () => {
+    Axios.post('http://localhost:3001/addPerson', {
+      fname: fname,
+      lname: lname,
+      homeworld: homeworld,
+      age: age,
+    });
+
+    setPeopleTable([
+      ...peopleTable,
+      { fname: fname, lname: lname, homeworld: homeworld, age: age },
+    ]);
+  };
+
+  // front-end html
   return (
-    <Router>
-      <div className="App">
-        <header className="App-header">
-          <Navbar bg="dark" variant="dark">
-            <Container>
-              <Navbar.Brand>
-                <Link to={"/create-person"}
-                  className="nav-link">
-                  bsg_people react test app
-                </Link>
-              </Navbar.Brand>
+    <div className="App">
+      <h1>CS340 bsg_people React Test App (barebones and overly simplified!!!)</h1>
+      <table>
+        <tr>
+          <th>fname</th>
+          <th>lname</th>
+          <th>homeworld</th>
+          <th>age</th>
+        </tr>
+      </table>
 
-              <Nav className="justify-content-end">
-                <Nav>
-                  <Link to={"/create-person"}
-                    className="nav-link">
-                    Create Person
-                  </Link>
-                </Nav>
+      {peopleTable.map((val) => {
+        return (
+          <div className="table">
+            <table>
+              <tr>
+                <td>{val.fname}</td>
+                <td>{val.lname}</td>
+                <td>{val.homeworld}</td>
+                <td>{val.age}</td>
+              </tr>
+            </table>
+          </div>
+        );
+      })}
 
-                <Nav>
-                  <Link to={"/person-list"}
-                    className="nav-link">
-                    Person List
-                  </Link>
-                </Nav>
-              </Nav>
-            </Container>
-          </Navbar>
-        </header>
-
-        <Container>
-          <Row>
-            <Col md={12}>
-              <div className="wrapper">
-                <Routes>
-                  <Route exact path="/"
-                    element={<CreatePerson />} />
-                  <Route path="/create-person"
-                    element={<CreatePerson />} />
-                  <Route path="/edit-person/:id"
-                    element={<EditPerson />} />
-                  <Route path="/person-list"
-                    element={<PersonList />} />
-                </Routes>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+      <div className="form">
+        <fieldset>
+          <legend>Add a new Person</legend>
+          <label>fname:</label>
+          <input
+            type="text"
+            name="fname"
+            onChange={(e) => {
+              setFname(e.target.value);
+            }}
+          />
+          <label>lname:</label>
+          <input
+            type="text"
+            name="lname"
+            onChange={(e) => {
+              setLname(e.target.value);
+            }}
+          />
+          <label>homeworld:</label>
+          <input
+            type="number"
+            name="homeworld"
+            onChange={(e) => {
+              setHomeworld(e.target.value);
+            }}
+          />
+          <label>age:</label>
+          <input
+            type="number"
+            name="age"
+            onChange={(e) => {
+              setAge(e.target.value);
+            }}
+          />
+          <button onClick={addPerson}>Add Person</button>
+        </fieldset>
       </div>
-    </Router>
+    </div>
   );
-};
+}
 
 export default App;
