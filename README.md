@@ -42,3 +42,4 @@ IV. Common issues:
 5) Standard code debug issues, faulty routes, mismatching ports, wrong ports. Remember that your back-end port in your index.js and your front-end port when you utilize pm2 serve need to be different. 
 6) Not updating app.js and index.js routes from localhost to flip1/2/3 URLs going from local testing to flip deployment.
 7) Not properly updating DB credentials in index.js.
+8) Server crashed or went down for whatever reason. Just do 'forever stop app.js' and restart with 'forever start app.js' again.
