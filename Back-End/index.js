@@ -12,9 +12,9 @@ const mysql = require('mysql');
 // db connection
 const db = mysql.createConnection({
     host: 'classmysql.engr.oregonstate.edu',
-    user: 'cs340_kamanda',
-    password: '9279',
-    database: 'cs340_kamanda',
+    user: 'cs340_yourUsername', //fill yourUsername with OSU username
+    password: 'XXXX', //last 4 digits of OSU id
+    database: 'cs340_yourUsername', //fill yourUsername with OSU username
 });
 
 // will report if connection is successful
