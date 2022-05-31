@@ -19,17 +19,13 @@
 
 table {
   table-layout: fixed;
-  width: 100%;
-  border: 3px solid;
-}
-
-thead,
-th {
-  border: 2px solid;
+  width: 85%;
+  border: 1.5px solid;
 }
 
 th,
 td {
-  padding: 20px;
-  border: 2px solid;
+  padding: 10px;
+  border: 1.5px solid;
+  height: 30px;
 }

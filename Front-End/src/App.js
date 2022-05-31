@@ -1,6 +1,8 @@
 // Reference: https://www.youtube.com/watch?v=T8mqZZ0r-RA
 // Utilized and adapted code from this tutorial video, credit to PedroTech
 
+// FRONT-END PORT (FOR OWN INFO): 32345
+
 // import react and axios
 import React, { useState, useEffect } from "react";
 import Axios from 'axios';
@@ -20,21 +22,25 @@ function App() {
   const [age, setAge] = useState('')
   const [peopleTable, setPeopleTable] = useState([]);
 
+  // receive data from get request
   useEffect(() => {
-    Axios.get('http://localhost:3001/getPeople').then((response) => {
+    Axios.get('http://flip1.engr.oregonstate.edu:35632/getPeople').then((response) => {
+      //console.log({ data: response.data })
+      //console.log(response.data)
       setPeopleTable(response.data);
     });
   }, []);
 
   // post user inputs and refresh our table
   const addPerson = () => {
-    Axios.post('http://localhost:3001/addPerson', {
+    Axios.post('http://flip1.engr.oregonstate.edu:35632/addPerson', {
       fname: fname,
       lname: lname,
       homeworld: homeworld,
       age: age,
     });
 
+    // update table with new row on user insert
     setPeopleTable([
       ...peopleTable,
       { fname: fname, lname: lname, homeworld: homeworld, age: age },
@@ -54,7 +60,7 @@ function App() {
         </tr>
       </table>
 
-      {peopleTable.map((val) => {
+      {Array.isArray(peopleTable) && peopleTable.map((val) => {
         return (
           <div className="table">
             <table>
