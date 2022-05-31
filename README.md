@@ -30,7 +30,7 @@ III. Flip Server Deployment Part 2 - Front-End
 5) Next, we want to install pm2 by running 'npm install pm2 serve -g'.
 6) Nearing the homestretch, we run 'npm run build' to run a build of our project. 
 7) Finally, to deploy the react app, run 'pm2 serve build YOUR_PORT --spa'. Replace YOUR_PORT with your chosen port number AND IMPORTANT: Make sure you select a different port for your front-end than whatever you chose for the back-end.
-8) With your server running and your front-end deployed, now you just need to navigate to your chosen front-end route, flip, and port URL and your project should be up and running barring any code issues (i.e. http://flip1.engr.oregonstate.edu:33333/).
+8) With your server running and your front-end deployed, now you just need to navigate to your chosen front-end route, flip, and port URL and your project should be up and running barring any code issues (i.e. http://flip1.engr.oregonstate.edu:32345/).
 9) If you want to update your front-end after code changes, all you need to do is run 'npm run build' again and your webpage will dynamically update after it finishes building.
 10) If interested, here are additional resources on pm2 and serve: https://www.loginradius.com/blog/async/react-app-deployment/, https://www.npmjs.com/package/pm2
 
