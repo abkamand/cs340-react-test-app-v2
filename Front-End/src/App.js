@@ -50,7 +50,7 @@ function App() {
   // front-end html
   return (
     <div className="App">
-      <h1>CS340 bsg_people React Test App (barebones and overly simplified!!!)</h1>
+      <h1>CS340 bsg_people React Test App</h1>
       <table>
         <tr>
           <th>fname</th>
